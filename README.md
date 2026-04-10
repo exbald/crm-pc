@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ridgeline CRM
+
+CRM platform for managing CRE deal pipelines — contacts, projects, tasks, issues, and reporting.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Database:** PostgreSQL (Neon)
+- **ORM:** Drizzle ORM
+- **Auth:** NextAuth.js v5
+- **UI:** Radix UI + Tailwind CSS v4
+- **Data Fetching:** TanStack React Query
+
+## Features
+
+- User registration and authentication (credentials)
+- Role-based access (admin, project manager, team member)
+- Contact management with project associations
+- Project tracking with milestones and status
+- Task management with priorities and assignment
+- Issue tracking (bugs, enhancements, requests)
+- Dashboard with overview metrics
+- Reports page
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+cp .env.example .env.local
+# Edit .env.local with your database URL and auth secret
+
+npm install
+npm run db:push
+npm run seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── (auth)/          # Login & registration pages
+│   ├── (dashboard)/     # Protected dashboard pages
+│   └── api/             # REST API routes
+├── components/
+│   ├── layout/          # Sidebar & topbar
+│   ├── providers.tsx    # Client-side providers
+│   └── ui/              # Radix UI primitives
+├── lib/
+│   ├── api/             # API client
+│   ├── auth.ts          # NextAuth config
+│   ├── db/              # Drizzle schema & client
+│   └── utils.ts         # Utilities
+└── types/               # Type declarations
+```
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run lint` | Run ESLint |
+| `npm run db:push` | Push schema to database |
+| `npm run db:generate` | Generate migrations |
+| `npm run seed` | Seed database with sample data |
