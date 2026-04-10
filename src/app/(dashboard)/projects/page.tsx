@@ -164,12 +164,12 @@ export default function ProjectsPage() {
                   <Badge variant={statusVariant[String(project.status)] || "default"}>
                     {statusLabel[String(project.status)] || String(project.status)}
                   </Badge>
-                  {project.targetDate && (
+                  {project.targetDate != null && (
                     <p className="mt-2 text-xs text-neutral-400">
                       Target: {formatDate(String(project.targetDate))}
                     </p>
                   )}
-                  {project.description && (
+                  {project.description != null && (
                     <p className="mt-2 line-clamp-2 text-xs text-neutral-500">
                       {String(project.description)}
                     </p>

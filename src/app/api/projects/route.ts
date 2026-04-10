@@ -30,7 +30,7 @@ export async function GET(request: Request) {
 
   const conditions = [];
   if (status && status !== "all") {
-    conditions.push(eq(projects.status, status));
+    conditions.push(eq(projects.status, status as any));
   }
   if (search) {
     conditions.push(

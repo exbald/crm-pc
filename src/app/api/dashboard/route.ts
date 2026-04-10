@@ -48,7 +48,7 @@ export async function GET() {
       const allTasks = await db
         .select()
         .from(tasks)
-        .where(eq(tasks.projectId, p.projects.id));
+        .where(eq(tasks.projectId, p.project.id));
 
       const doneTasks = allTasks.filter((t) => t.status === "done");
       const nextMilestone = (
@@ -57,7 +57,7 @@ export async function GET() {
           .from(milestones)
           .where(
             and(
-              eq(milestones.projectId, p.projects.id),
+              eq(milestones.projectId, p.project.id),
               sql`${milestones.status} != 'completed'`
             )
           )
@@ -66,8 +66,8 @@ export async function GET() {
       )[0] || null;
 
       return {
-        ...p.projects,
-        owner: p.users,
+        ...p.project,
+        owner: p.user,
         taskStats: {
           total: allTasks.length,
           done: doneTasks.length,

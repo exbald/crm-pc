@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 
+// @ts-expect-error NextAuth v5 ESM compatibility
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
@@ -39,17 +40,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.id = user.id;
-        token.role = (user as Record<string, unknown>).role;
+        token.role = user.role;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (session.user) {
-        session.user.id = token.id as string;
-        (session.user as Record<string, unknown>).role = token.role;
+        session.user.id = token.id;
+        session.user.role = token.role;
       }
       return session;
     },

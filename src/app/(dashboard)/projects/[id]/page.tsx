@@ -171,7 +171,7 @@ export default function ProjectDetailPage() {
                 {String(owner.name)}
               </span>
             )}
-            {project.targetDate && (
+            {project.targetDate != null && (
               <span className="flex items-center gap-1">
                 <Target className="h-3.5 w-3.5" />
                 Target: {formatDate(String(project.targetDate))}
@@ -240,7 +240,7 @@ export default function ProjectDetailPage() {
                         <Flag className="h-3.5 w-3.5 text-neutral-400" />
                         <span className="text-sm font-medium text-neutral-900">{String(m.name)}</span>
                       </div>
-                      {m.targetDate && (
+                      {m.targetDate != null && (
                         <p className="mt-0.5 text-xs text-neutral-400">
                           {formatDate(String(m.targetDate))}
                         </p>
@@ -249,8 +249,8 @@ export default function ProjectDetailPage() {
                     <div className="flex items-center gap-3">
                       <div className="w-32">
                         <div className="mb-0.5 flex justify-between text-xs text-neutral-500">
-                          <span>{m.doneTaskCount}/{m.taskCount}</span>
-                          <span>{m.progress}%</span>
+                          <span>{String(m.doneTaskCount)}/{String(m.taskCount)}</span>
+                          <span>{String(m.progress)}%</span>
                         </div>
                         <div className="h-1.5 overflow-hidden rounded-full bg-neutral-100">
                           <div
@@ -328,7 +328,7 @@ export default function ProjectDetailPage() {
                           {String(m.status)}
                         </Badge>
                       </div>
-                      {m.targetDate && (
+                      {m.targetDate != null && (
                         <p className="mt-0.5 text-xs text-neutral-400">
                           {formatDate(String(m.targetDate))}
                         </p>
@@ -336,8 +336,8 @@ export default function ProjectDetailPage() {
                     </div>
                     <div className="w-40">
                       <div className="mb-0.5 flex justify-between text-xs text-neutral-500">
-                        <span>{m.doneTaskCount}/{m.taskCount} tasks</span>
-                        <span>{m.progress}%</span>
+                        <span>{String(m.doneTaskCount)}/{String(m.taskCount)} tasks</span>
+                        <span>{String(m.progress)}%</span>
                       </div>
                       <div className="h-2 overflow-hidden rounded-full bg-neutral-100">
                         <div

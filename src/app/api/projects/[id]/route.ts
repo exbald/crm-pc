@@ -40,12 +40,12 @@ export async function GET(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const [milestoneList] = await db
+  const milestoneList = await db
     .select()
     .from(milestones)
     .where(eq(milestones.projectId, id));
 
-  const [taskList] = await db
+  const taskList = await db
     .select()
     .from(tasks)
     .where(eq(tasks.projectId, id));

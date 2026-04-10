@@ -43,9 +43,9 @@ export async function GET(request: Request) {
   if (search) {
     conditions.push(sql`${issues.title} ILIKE ${`%${search}%`}`);
   }
-  if (category && category !== "all") conditions.push(eq(issues.category, category));
-  if (status && status !== "all") conditions.push(eq(issues.status, status));
-  if (priority && priority !== "all") conditions.push(eq(issues.priority, priority));
+  if (category && category !== "all") conditions.push(eq(issues.category, category as any));
+  if (status && status !== "all") conditions.push(eq(issues.status, status as any));
+  if (priority && priority !== "all") conditions.push(eq(issues.priority, priority as any));
   if (projectId) conditions.push(eq(issues.projectId, projectId));
   if (assigneeId === "me") conditions.push(eq(issues.assigneeId, session.user.id));
   else if (assigneeId) conditions.push(eq(issues.assigneeId, assigneeId));

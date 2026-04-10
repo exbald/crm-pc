@@ -1,27 +1,31 @@
-import { Avatar as AvatarPrimitive } from "@radix-ui/react-avatar";
+import { Root as AvatarPrimitiveRoot, Image as AvatarPrimitiveImage, Fallback as AvatarPrimitiveFallback } from "@radix-ui/react-avatar";
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { cn, getInitials } from "@/lib/utils";
 
 const Avatar = forwardRef<
   HTMLDivElement,
-  ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root
+  ComponentPropsWithoutRef<typeof AvatarPrimitiveRoot> & { size?: "sm" | "md" | "lg" }
+>(({ className, size = "md", ...props }, ref) => {
+  const sizeClasses = { sm: "h-6 w-6 text-xs", md: "h-8 w-8 text-sm", lg: "h-10 w-10 text-base" };
+  return (
+  <AvatarPrimitiveRoot
     ref={ref}
     className={cn(
-      "relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full",
+      "relative flex shrink-0 overflow-hidden rounded-full",
+      sizeClasses[size],
       className
     )}
     {...props}
   />
-));
+  );
+});
 Avatar.displayName = "Avatar";
 
 const AvatarImage = forwardRef<
   HTMLImageElement,
-  ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+  ComponentPropsWithoutRef<typeof AvatarPrimitiveImage>
 >(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
+  <AvatarPrimitiveImage
     ref={ref}
     className={cn("aspect-square h-full w-full object-cover", className)}
     {...props}
@@ -31,11 +35,11 @@ AvatarImage.displayName = "AvatarImage";
 
 const AvatarFallback = forwardRef<
   HTMLDivElement,
-  ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> & {
+  ComponentPropsWithoutRef<typeof AvatarPrimitiveFallback> & {
     name?: string;
   }
 >(({ className, name, ...props }, ref) => (
-  <AvatarPrimitive.Fallback
+  <AvatarPrimitiveFallback
     ref={ref}
     className={cn(
       "flex h-full w-full items-center justify-center rounded-full bg-primary-100 text-xs font-medium text-primary-700",
@@ -44,7 +48,7 @@ const AvatarFallback = forwardRef<
     {...props}
   >
     {name ? getInitials(name) : props.children}
-  </AvatarPrimitive.Fallback>
+  </AvatarPrimitiveFallback>
 ));
 AvatarFallback.displayName = "AvatarFallback";
 

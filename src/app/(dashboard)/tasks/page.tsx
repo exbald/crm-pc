@@ -290,7 +290,7 @@ export default function TasksPage() {
                           </td>
                           <td className="px-3 py-3">
                             <p className="text-sm font-medium text-neutral-900">{String(task.title)}</p>
-                            {proj && <p className="text-xs text-neutral-400">{String(proj.name)}</p>}
+                            {proj != null && <p className="text-xs text-neutral-400">{String(proj.name)}</p>}
                           </td>
                           <td className="px-3 py-3">
                             <Badge variant={statusVariant[String(task.status)] || "default"}>
@@ -307,7 +307,7 @@ export default function TasksPage() {
                             )}
                           </td>
                           <td className="px-3 py-3">
-                            {user && <Avatar size="sm"><AvatarFallback name={String(user.name)} /></Avatar>}
+                            {user != null && <Avatar size="sm"><AvatarFallback name={String(user.name)} /></Avatar>}
                           </td>
                         </tr>
                       );
@@ -356,16 +356,16 @@ export default function TasksPage() {
                                   </p>
                                 </div>
                               </div>
-                              {proj && (
+                              {proj != null && (
                                 <p className="mt-1 truncate text-xs text-neutral-400">{String(proj.name)}</p>
                               )}
                               <div className="mt-2 flex items-center justify-between">
-                                {task.dueDate && (
+                                {task.dueDate != null && (
                                   <span className={`text-xs ${isOverdue(String(task.dueDate)) && task.status !== "done" ? "font-medium text-danger-700" : "text-neutral-500"}`}>
                                     {formatDate(String(task.dueDate))}
                                   </span>
                                 )}
-                                {user && <Avatar size="sm"><AvatarFallback name={String(user.name)} /></Avatar>}
+                                {user != null && <Avatar size="sm"><AvatarFallback name={String(user.name)} /></Avatar>}
                               </div>
                             </div>
                           );
@@ -403,7 +403,7 @@ export default function TasksPage() {
               {String(selectedTask.title)}
             </h2>
             <div className="space-y-2 text-sm">
-              {selectedTask.project && (
+              {selectedTask.project != null && (
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Project</span>
                   <Link href={`/projects/${(selectedTask.project as Record<string, unknown>).id}`} className="font-medium text-primary-600">
@@ -411,7 +411,7 @@ export default function TasksPage() {
                   </Link>
                 </div>
               )}
-              {selectedTask.dueDate && (
+              {selectedTask.dueDate != null && (
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Due Date</span>
                   <span className={isOverdue(String(selectedTask.dueDate)) && selectedTask.status !== "done" ? "font-medium text-danger-700" : "text-neutral-900"}>
@@ -419,7 +419,7 @@ export default function TasksPage() {
                   </span>
                 </div>
               )}
-              {selectedTask.assignee && (
+              {selectedTask.assignee != null && (
                 <div className="flex items-center justify-between">
                   <span className="text-neutral-500">Assignee</span>
                   <div className="flex items-center gap-1">
@@ -433,7 +433,7 @@ export default function TasksPage() {
                 <span className="text-neutral-900">{formatDate(String(selectedTask.createdAt))}</span>
               </div>
             </div>
-            {selectedTask.description && (
+            {selectedTask.description != null && (
               <div className="mt-4 border-t border-neutral-100 pt-4">
                 <p className="text-sm text-neutral-700">{String(selectedTask.description)}</p>
               </div>

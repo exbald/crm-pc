@@ -42,8 +42,8 @@ export async function GET(request: Request) {
   if (search) {
     conditions.push(sql`${tasks.title} ILIKE ${`%${search}%`}`);
   }
-  if (status && status !== "all") conditions.push(eq(tasks.status, status));
-  if (priority && priority !== "all") conditions.push(eq(tasks.priority, priority));
+  if (status && status !== "all") conditions.push(eq(tasks.status, status as any));
+  if (priority && priority !== "all") conditions.push(eq(tasks.priority, priority as any));
   if (projectId) conditions.push(eq(tasks.projectId, projectId));
   if (assigneeId === "me") conditions.push(eq(tasks.assigneeId, session.user.id));
   else if (assigneeId) conditions.push(eq(tasks.assigneeId, assigneeId));
@@ -68,8 +68,8 @@ export async function GET(request: Request) {
     };
 
     for (const task of allTasks) {
-      if (columns[task.tasks.status]) {
-        columns[task.tasks.status].push(task);
+      if (columns[task.task.status]) {
+        columns[task.task.status].push(task);
       }
     }
 

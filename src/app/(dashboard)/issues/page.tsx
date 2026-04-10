@@ -276,7 +276,7 @@ export default function IssuesPage() {
               {String(selectedIssue.title)}
             </h2>
             <div className="space-y-2 text-sm">
-              {selectedIssue.project && (
+              {selectedIssue.project != null && (
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Project</span>
                   <Link href={`/projects/${(selectedIssue.project as Record<string, unknown>).id}`} className="font-medium text-primary-600">
@@ -284,13 +284,13 @@ export default function IssuesPage() {
                   </Link>
                 </div>
               )}
-              {selectedIssue.reporter && (
+              {selectedIssue.reporter != null && (
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Reporter</span>
                   <span className="text-neutral-900">{String((selectedIssue.reporter as Record<string, unknown>).name)}</span>
                 </div>
               )}
-              {selectedIssue.assignee && (
+              {selectedIssue.assignee != null && (
                 <div className="flex justify-between">
                   <span className="text-neutral-500">Assignee</span>
                   <span className="text-neutral-900">{String((selectedIssue.assignee as Record<string, unknown>).name)}</span>
@@ -301,7 +301,7 @@ export default function IssuesPage() {
                 <span className="text-neutral-900">{formatDate(String(selectedIssue.createdAt))}</span>
               </div>
             </div>
-            {selectedIssue.description && (
+            {selectedIssue.description != null && (
               <div className="mt-4 border-t border-neutral-100 pt-4">
                 <p className="text-sm text-neutral-700">{String(selectedIssue.description)}</p>
               </div>

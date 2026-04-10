@@ -17,7 +17,7 @@ export function Topbar() {
               {session.user.name}
             </span>
             <Avatar>
-              <AvatarFallback name={session.user.name} />
+              <AvatarFallback name={session.user.name || ""} />
             </Avatar>
             <button
               onClick={() => signOut()}

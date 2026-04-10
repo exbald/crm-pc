@@ -80,7 +80,7 @@ export async function PATCH(
 
   const updateData: Record<string, unknown> = { ...parsed.data, updatedAt: new Date() };
   if (parsed.data.status === "done") updateData.completedAt = new Date();
-  else if (parsed.data.status && parsed.data.status !== "done") updateData.completedAt = null;
+  else if (parsed.data.status) updateData.completedAt = null;
 
   const [updated] = await db
     .update(tasks)

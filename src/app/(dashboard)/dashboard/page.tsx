@@ -131,7 +131,7 @@ export default function DashboardPage() {
                       )}
                     </div>
                     <div className="shrink-0 text-right">
-                      {taskObj.dueDate && (
+                      {taskObj.dueDate != null && (
                         <p
                           className={`text-xs ${
                             isOverdue(String(taskObj.dueDate))
@@ -267,7 +267,7 @@ export default function DashboardPage() {
                   {nextMilestone && (
                     <p className="text-xs text-neutral-400">
                       Next: {String(nextMilestone.name)}
-                      {nextMilestone.targetDate &&
+                      {nextMilestone.targetDate != null &&
                         ` - ${formatDate(String(nextMilestone.targetDate))}`}
                     </p>
                   )}
